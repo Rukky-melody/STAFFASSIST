@@ -1,1 +1,1 @@
-"# STAFFASSIST" 
+A Full-Stack Workforce Management System built with Node.js, Express, and MySQL. StaffAssist provides IT Administrators with a secure dashboard to manage employee identities and track support tickets, while offering employees a streamlined interface for account activation and technical assistance. Features include JWT authentication, Bcrypt password hashing, and a persistent MySQL relational database.
