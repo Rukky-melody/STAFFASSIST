@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Admin Dashboard | StaffAssist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">IT Admin Desk</a>
+            <div class="d-flex">
+                <span class="navbar-text text-white me-3">
+                    Admin: <strong id="adminUserDisplay">ITAdmin</strong>
+                </span>
+
+                <div class="d-flex align-items-center">
+    <a href="https://chatgpt.com" target="_blank" class="btn btn-outline-info me-3 d-flex align-items-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" width="20" class="me-2" alt="AI">
+        AI Assistant
+    </a>
+    
+</div>
+               <a href="./admin-login.html"><button class="btn btn-outline-light" id="adminLogoutBtn">Logout</button></a> 
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="mb-4 text-danger">Administrator Management Portal</h2>
+        
+        <div class="row">
+            <div class="col-lg-5 mb-4">
+                
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-dark text-white">
+                        👥 Create New Employee Account
+                    </div>
+                    <div class="card-body">
+                        <form id="createEmployeeForm">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="newFirstName" placeholder="First Name" required autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="newLastName" placeholder="Last Name" required  autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" id="newEmail" placeholder="Email" required autocomplete="off">
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Generate Employee ID</button>
+                            <div id="employeeAlert" class="alert alert-success mt-3 d-none" role="alert"></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        📢 Post New Announcement
+                    </div>
+                    <div class="card-body">
+                        <form id="addAnnouncementForm">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="announcementTitle" placeholder="Title (e.g., Maintenance Alert)" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="announcementContent" rows="3" placeholder="Detailed content for the Notice Board" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100">Post Announcement</button>
+                            <div id="announcementAlert" class="alert alert-success mt-3 d-none" role="alert"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-danger text-white">
+                        🎫 Employee Support Tickets
+                    </div>
+                    <div class="card-body">
+                        <div id="ticketListContainer">
+                            <p class="text-center text-muted">Loading all submitted tickets...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="assests/js/admin-dashboard.js"></script> 
+
+</body>
+</html>
