@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+:root {
+    --brand-red: #e63946;
+    --deep-slate: #1d3557;
+    --bg-canvas: #f8fafc;
+}
+
+body {
+    background-color: var(--bg-canvas) !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* 1. Floating Modern Header */
+.navbar {
+    background-color: #ffffffcc !important;
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--deep-slate) !important;
+}
+
+/* 2. Professional Dashboard Grid */
+.card {
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
+    background: #fff !important;
+}
+
+.card-header {
+    background: transparent !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding: 1.5rem !important;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* 3. The Ticket Component (The "Real World" look) */
+.ticket-row {
+    background: #fff;
+    padding: 1.25rem;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+.ticket-row:hover {
+    border-color: var(--brand-red);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* 4. Action Buttons */
+.btn-primary-action {
+    background-color: var(--brand-red);
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border: none;
+}

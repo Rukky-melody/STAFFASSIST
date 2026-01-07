@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addAnnouncementForm = document.getElementById('addAnnouncementForm');
     const announcementAlert = document.getElementById('announcementAlert');
     const ticketListContainer = document.getElementById('ticketListContainer');
+    const adminLogoutBtn = document.getElementById('adminLogoutBtn');
 
     // 1. AUTHENTICATION CHECK
     if (!adminToken) {
@@ -20,11 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('adminUserDisplay').textContent = "ITAdmin";
 
-    document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+    // --------------------------------------------------
+    // 1. LOGOUT LOGIC
+    // --------------------------------------------------
+
+if (adminLogoutBtn) {
+    adminLogoutBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevents the browser from following the link before the script runs
         localStorage.removeItem('adminToken');
         window.location.href = 'index.html';
     });
-
+}
     // --------------------------------------------------
     // 2. CREATE EMPLOYEE ID LOGIC
     // --------------------------------------------------
@@ -64,11 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    
     // --------------------------------------------------
-    // 3. FETCH ALL TICKETS (The "IT Side" display)
+    // 3. FETCH ALL TICKETS (Updated with Dismiss logic)
     // --------------------------------------------------
     async function fetchAllTickets() {
         try {
+            // Get the list of IDs this specific browser has dismissed
+            const dismissedTickets = JSON.parse(localStorage.getItem('dismissedTickets')) || [];
+
             const response = await fetch(`${API_BASE}/tickets/it-desk`, {
                 method: 'GET',
                 headers: { 'Authorization': `Bearer ${adminToken}` }
@@ -77,17 +88,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (data.tickets && data.tickets.length > 0) {
-                ticketListContainer.innerHTML = data.tickets.map(ticket => `
-                    <div class="card mb-3 border-start border-danger border-4 shadow-sm">
+                // Filter out any tickets that are in our "dismissed" list
+                const visibleTickets = data.tickets.filter(t => !dismissedTickets.includes(t.id.toString()));
+                
+
+                if (visibleTickets.length === 0) {
+                    ticketListContainer.innerHTML = '<p class="text-center text-muted mt-3">All tickets have been dismissed.</p>';
+                    return;
+                }
+
+                ticketListContainer.innerHTML = visibleTickets.map(ticket => `
+                    <div class="card mb-3 border-start border-danger border-4 shadow-sm" id="ticket-card-${ticket.id}">
                         <div class="card-body p-2">
                             <div class="d-flex justify-content-between">
-                                <h6 class="text-danger font-weight-bold">${ticket.id}</h6>
+                                <h6 class="text-danger font-weight-bold">#${ticket.id}</h6>
                                 <span class="badge bg-secondary">${ticket.status}</span>
                             </div>
                             <p class="mb-1"><strong>Issue:</strong> ${ticket.issueType}</p>
                             <p class="small text-muted mb-1">${ticket.description}</p>
-                            <div class="text-end" style="font-size: 0.75rem;">
-                                Submitted by: ${ticket.employeeId} | ${new Date(ticket.createdAt).toLocaleString()}
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <div class="small text-muted" style="font-size: 0.7rem;">
+                                    By: ${ticket.employeeId} | ${new Date(ticket.createdAt).toLocaleDateString()}
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-primary" style="font-size: 0.7rem;">Open</button>
+                                    <button class="btn btn-sm btn-outline-danger" style="font-size: 0.7rem;" onclick="dismissTicketUI('${ticket.id}')">
+                                        Dismiss
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,6 +129,21 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Fetch Tickets Error:', error);
         }
     }
+
+    // --- ADD THIS AT THE VERY BOTTOM (Outside DOMContentLoaded if needed, or keep inside) ---
+    window.dismissTicketUI = function(ticketId) {
+        if (confirm("Dismiss this ticket from your view? (It will remain in the database)")) {
+            // 1. Save to LocalStorage
+            let dismissed = JSON.parse(localStorage.getItem('dismissedTickets')) || [];
+            if (!dismissed.includes(ticketId.toString())) {
+                dismissed.push(ticketId.toString());
+                localStorage.setItem('dismissedTickets', JSON.stringify(dismissed));
+            }
+            // 2. Remove from UI immediately
+            const element = document.getElementById(`ticket-card-${ticketId}`);
+            if (element) element.remove();
+        }
+    };
 
     // --------------------------------------------------
     // 4. POST ANNOUNCEMENT
@@ -135,3 +179,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the ticket list on load
     fetchAllTickets();
 });
+
+
