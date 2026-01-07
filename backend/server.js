@@ -41,3 +41,8 @@ app.listen(PORT, () => {
     console.log(`🌐 API Base URL: http://localhost:${PORT}/api`);
     console.log('--------------------------------------------------');
 })
+
+app.use((req, res) => {
+    console.log(`⚠️ 404 Alert: Browser tried to reach ${req.method} ${req.url}`);
+    res.status(404).send("Route not found on server");
+});
