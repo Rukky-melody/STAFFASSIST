@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('staffToken');
     const employeeId = localStorage.getItem('employeeId');
     const email = localStorage.getItem('email');
-    const API_BASE = 'https://staffassist-backend.onrender.com/api';
+    const API_BASE = 'https://staffassist.onrender.com/api';
     
     // Element Lookups
     const itTicketForm = document.getElementById('itTicketForm');

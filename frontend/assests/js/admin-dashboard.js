@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // TOP-LEVEL VARIABLES
     // --------------------------------------------------
     const adminToken = localStorage.getItem('adminToken');
-    const API_BASE = 'https://staffassist-backend.onrender.com/api';
+    const API_BASE = 'https://staffassist.onrender.com/api';
 
     const createEmployeeForm = document.getElementById('createEmployeeForm');
     const employeeAlert = document.getElementById('employeeAlert');

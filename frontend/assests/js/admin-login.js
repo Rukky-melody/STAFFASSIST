@@ -9,7 +9,7 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
     const password = document.getElementById('adminPass').value;
 
     try {
-        const response = await fetch('https://staffassist-backend.onrender.com/api/admin/login', {
+        const response = await fetch('https://staffassist.onrender.com/api/admin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })

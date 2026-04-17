@@ -14,7 +14,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     }
 
     try {
-        const response = await fetch('https://staffassist-backend.onrender.com/api/auth/set-password', {
+        const response = await fetch('https://staffassist.onrender.com/api/auth/set-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ employeeId, password })

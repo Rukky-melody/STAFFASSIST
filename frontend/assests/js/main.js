@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginError = document.getElementById('loginError');
 
     // The base URL for your Express backend
-    const API_URL = 'https://staffassist-backend.onrender.com/api/auth/login';
+    const API_URL = 'https://staffassist.onrender.com/api/auth/login';
 
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
