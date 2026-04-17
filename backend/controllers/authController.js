@@ -50,7 +50,7 @@ exports.staffLogin = async (req, res) => {
     }
 
     try {
-        const [rows] = await db.query('SELECT employeeId, password FROM employees WHERE employeeId = ?', [employeeId]);
+        const [rows] = await db.query('SELECT employeeId, password, email FROM employees WHERE employeeId = ?', [employeeId]);
         const user = rows[0];
 
         if (!user || !user.password) {
@@ -68,7 +68,7 @@ exports.staffLogin = async (req, res) => {
             { expiresIn: '1d' }
         );
 
-        res.status(200).json({ message: 'Login successful!', token, employeeId: user.employeeId });
+        res.status(200).json({ message: 'Login successful!', token, employeeId: user.employeeId, email: user.email });
 
     } catch (error) {
         console.error('DATABASE CONNECTION FAILED DURING LOGIN:', error); 

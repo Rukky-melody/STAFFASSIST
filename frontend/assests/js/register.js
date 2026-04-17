@@ -1,6 +1,6 @@
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const alert = document.getElementById('regAlert');
+    const alert = document.getElementById('employeeAlert');
     
     const employeeId = document.getElementById('regEmpId').value;
     const password = document.getElementById('regPassword').value;
@@ -14,7 +14,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/auth/set-password', {
+        const response = await fetch('https://staffassist-backend.onrender.com/api/auth/set-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ employeeId, password })

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginError = document.getElementById('loginError');
 
     // The base URL for your Express backend
-    const API_URL = 'http://localhost:3000/api/auth/login';
+    const API_URL = 'https://staffassist-backend.onrender.com/api/auth/login';
 
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Store the token for future API calls
                     localStorage.setItem('staffToken', data.token);
                     localStorage.setItem('employeeId', data.employeeId);
+                    localStorage.setItem('email', data.email);
                     
                     // Redirect to the dashboard
                     window.location.href = 'employee-dashboard.html';

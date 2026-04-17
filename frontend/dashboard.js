@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --------------------------------------------------
     const token = localStorage.getItem('staffToken');
     const employeeId = localStorage.getItem('employeeId');
-    const API_BASE = 'http://localhost:3000/api';
+    const email = localStorage.getItem('email');
+    const API_BASE = 'https://staffassist-backend.onrender.com/api';
     
     // Element Lookups
     const itTicketForm = document.getElementById('itTicketForm');
@@ -26,11 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('employeeIdDisplay').textContent = employeeId;
     document.getElementById('employeeNameDisplay').textContent = `ID: ${employeeId}`;
+    document.getElementById('employeeEmailDisplay').textContent = email;
 
     // Logout functionality
     document.getElementById('logoutBtn').addEventListener('click', () => {
         localStorage.removeItem('staffToken');
         localStorage.removeItem('employeeId');
+        localStorage.removeItem('email');
         window.location.href = 'index.html';
     });
 
